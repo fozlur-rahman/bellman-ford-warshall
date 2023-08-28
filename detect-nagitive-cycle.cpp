@@ -48,10 +48,36 @@ int main()
             }
         }
     }
+
+    bool cycle = false;
+
     for (int i = 1; i <= n; i++)
     {
-        cout << "Node " << i << " : " << dis[i] << " ";
-        cout << endl;
+        for (int j = 0; j < v.size(); j++)
+        {
+            Edges ed = v[j];
+            int a = ed.u;
+            int b = ed.v;
+            int w = ed.w;
+            if (dis[a] + w < dis[b])
+            {
+                cycle = true;
+                break;
+                dis[b] = dis[a] + w;
+            }
+        }
+    }
+    if (cycle)
+    {
+        cout << "Cycle Exist";
+    }
+    else
+    {
+        for (int i = 1; i <= n; i++)
+        {
+            cout << "Node" << i << " : " << dis[i];
+            cout << endl;
+        }
     }
 
     return 0;
